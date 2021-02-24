@@ -1,6 +1,6 @@
-'use strict';
-const React = require('react');
-const {useInput, useApp, Box, Text} = require('ink');
+"use strict";
+const React = require("react");
+const { useInput, useApp, Box, Text } = require("ink");
 
 const App = ({ name = "Tara-tessa" }) => (
 	<>
@@ -46,12 +46,16 @@ const App = ({ name = "Tara-tessa" }) => (
 module.exports = App;
 
 const Robot = () => {
-	const {exit} = useApp();
+	const { exit } = useApp();
 	const [x, setX] = React.useState(1);
 	const [y, setY] = React.useState(1);
 
+	const [a, setA] = React.useState(1);
+	const [b, setB] = React.useState(1);
+
+
 	useInput((input, key) => {
-		if (input === 'q') {
+		if (input === "q") {
 			exit();
 		}
 
@@ -72,11 +76,36 @@ const Robot = () => {
 		}
 	});
 
+		useInput((input, key) => {
+			if (input === "q") {
+				exit();
+			}
+
+			if (key.leftArrow) {
+				setA(Math.max(1, a - 1));
+			}
+
+			if (key.rightArrow) {
+				setA(Math.min(20, a + 1));
+			}
+
+			if (key.upArrow) {
+				setB(Math.max(1, b - 1));
+			}
+
+			if (key.downArrow) {
+				setB(Math.min(10, b + 1));
+			}
+		});
+
 	return (
 		<Box flexDirection="column">
 			<Text>Use arrow keys to move the face. Press “q” to exit.</Text>
 			<Box height={12} paddingLeft={x} paddingTop={y}>
-				<Text>^_^</Text>
+				<Text>🦄</Text>
+			</Box>
+			<Box height={12} paddingLeft={a} paddingTop={b}>
+				<Text>🐝</Text>
 			</Box>
 		</Box>
 	);
