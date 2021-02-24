@@ -68,22 +68,17 @@ const Robot = () => {
 	const [s, setS] = React.useState(1);
 	const [d, setD] = React.useState(1);
 
-	const [a, setA] = React.useState(1);
-	const [b, setB] = React.useState(1);
-
 	useInput((input, key) => {
 		if (input === "q") {
 			exit();
 		}
 
-		if (key.tab) {
+		if (key.leftArrow) {
 			setX(Math.max(1, x - 1));
-			setS(Math.max(10, s - 10));
 		}
 
 		if (key.rightArrow) {
 			setX(Math.min(20, x + 1));
-			setS(Math.min(-20, s - 20));
 		}
 
 		if (key.upArrow) {
@@ -92,17 +87,47 @@ const Robot = () => {
 
 		if (key.downArrow) {
 			setY(Math.min(10, y + 1));
+			console.log(y);
+		}
+	});
+
+	useInput((input, key) => {
+		if (input === "q") {
+			exit();
+		}
+
+		if (key.leftArrow) {
+			console.log(key);
+			setS(Math.max(5, s - 5));
+		}
+
+		if (key.rightArrow) {
+			setS(Math.min(10, d + 10));
+		}
+
+		if (key.return) {
+			setD(Math.max(10, d - 10));
+		}
+
+		if (key.delete) {
+			setD(Math.min(-10, d - 10));
 		}
 	});
 
 	return (
 		<Box flexDirection="column">
-			<Text>Use arrow keys to move the face. Press “q” to exit.</Text>
-			<Box height={2} paddingLeft={x} paddingTop={y}>
-				<Text>🔥</Text>
+			<Text borderStyle="round" marginRight={2}>
+				Put out the fire by clicking your keys.
+			</Text>
+			<Box height={10} paddingLeft={x} paddingTop={y}>
+				<Text paddingLeft={x} paddingTop={y}>
+					🔥
+				</Text>
 			</Box>
-			<Box height={2} paddingLeft={s} paddingTop={d}>
-				<Text>💧</Text>
+			<Box height={10} paddingLeft={s} paddingTop={d}>
+				<Text paddingLeft={s} paddingTop={d}>
+					💧
+				</Text>
 			</Box>
 		</Box>
 	);
