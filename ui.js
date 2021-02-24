@@ -75,30 +75,33 @@ const Robot = () => {
 
 		if (key.leftArrow) {
 			setX(Math.max(1, x - 1));
-			setS(Math.max(10, s - 10));
+			setS(Math.max(5, s - 5));
 		}
 
 		if (key.rightArrow) {
 			setX(Math.min(20, x + 1));
-			setD(Math.min(-20, d - 20));
+			setS(Math.min(10, d - 10));
 		}
 
 		if (key.upArrow) {
 			setY(Math.max(1, y - 1));
+			setD(Math.max(10, d - 10))
 		}
 
 		if (key.downArrow) {
 			setY(Math.min(10, y + 1));
+			console.log(y);
+			setD(Math.min(-10, d - 10));
 		}
 	});
 
 	return (
 		<Box flexDirection="column">
-			<Text>Use arrow keys to move the face. Press “q” to exit.</Text>
-			<Box height={2} paddingLeft={x} paddingTop={y}>
+			<Text>Put out the fire by clicking your keys.</Text>
+			<Box height={10} paddingLeft={x} paddingTop={y}>
 				<Text>🔥</Text>
 			</Box>
-			<Box height={2} paddingLeft={s} paddingTop={d}>
+			<Box height={10} paddingLeft={s} paddingTop={d}>
 				<Text>💧</Text>
 			</Box>
 		</Box>
